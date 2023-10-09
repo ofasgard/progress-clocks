@@ -33,6 +33,8 @@ impl ProgressClock {
 	pub fn get_ticks(&self) -> i32 { self.ticks }
 	pub fn is_positive(&self) -> bool { self.positive }
 	
+	pub fn set_name(&mut self, name : &str) { self.name = name.to_string(); }
+	
 	pub fn enlarge(&mut self) {
 		self.size = min(max(2, self.size+2), 12);
 	}

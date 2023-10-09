@@ -60,9 +60,16 @@ function addClockToParent(parent, clock) {
 	parent.appendChild(div);
 
 	// Set the clock's title.
-	const title = document.createElement("pre");
-	title.textContent = clock.get_name();
+	const title = document.createElement("input");
+	title.value = clock.get_name();
 	div.appendChild(title);
+	
+	// Add event listener for the clock's title to update the underlying object.
+	title.addEventListener("change", event => {
+		clock.set_name(title.value);
+	});
+	
+	div.appendChild(document.createElement("br"));
 	
 	// Create a canvas to draw the clock on.
 	const canvas = document.createElement("canvas");
@@ -129,10 +136,7 @@ const renderLoop = () => {
 		const clock = clocks[id];
 		const div = document.getElementById(id);
 		
-		const title = div.children[0];
-		title.textContent = clock.get_name();
-		
-		const canvas = div.children[1];
+		const canvas = div.children[2];
 		const ctx = canvas.getContext('2d');
 		
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
