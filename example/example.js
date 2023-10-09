@@ -134,17 +134,23 @@ function removeClock(clock) {
 	delete clocks[id];
 }
 
+var clocks = {}
+
+const positive_button = document.getElementById("add-positive");
+const negative_button = document.getElementById("add-negative");
 const clock_area = document.getElementById("clock-area");
 
-const clock_1 = ProgressClock.new("Guards Arrive", false);
-const clock_2 = ProgressClock.new("You Have Escaped!", true);
+positive_button.addEventListener("click", event => {
+	const clock = ProgressClock.new("Progress Clock", true);
+	const clock_id = addClock(clock_area, clock);
+	clocks[clock_id] = clock;
+});
 
-const clock_1_id = addClock(clock_area, clock_1);
-const clock_2_id = addClock(clock_area, clock_2);
-
-var clocks = {};
-clocks[clock_1_id] = clock_1;
-clocks[clock_2_id] = clock_2;
+negative_button.addEventListener("click", event => {
+	const clock = ProgressClock.new("Progress Clock", false);
+	const clock_id = addClock(clock_area, clock);
+	clocks[clock_id] = clock;
+});
 
 // Recursive rendering loop to animate the page.
 const renderLoop = () => {
