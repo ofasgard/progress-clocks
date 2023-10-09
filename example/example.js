@@ -99,6 +99,12 @@ function addClock(parent, clock) {
 	reduce.innerHTML = "Reduce";
 	div.appendChild(reduce);
 	
+	div.appendChild(document.createElement("br"));
+	
+	const remove = document.createElement("button");
+	remove.innerHTML = "Remove";
+	div.appendChild(remove);
+	
 	// Add event listeners to connect the buttons to the clock's exported functions.
 	
 	tick.addEventListener("click", event => {
@@ -113,6 +119,19 @@ function addClock(parent, clock) {
 	reduce.addEventListener("click", event => {
 		clock.reduce();
 	});
+	remove.addEventListener("click", event => {
+		removeClock(clock);
+	});
+	
+	return clock.get_id();
+}
+
+function removeClock(clock) {
+	const id = clock.get_id();
+	const div = document.getElementById(id);
+	div.remove();
+	
+	delete clocks[id];
 }
 
 const clock_area = document.getElementById("clock-area");
@@ -120,18 +139,17 @@ const clock_area = document.getElementById("clock-area");
 const clock_1 = ProgressClock.new("Guards Arrive", false);
 const clock_2 = ProgressClock.new("You Have Escaped!", true);
 
-addClock(clock_area, clock_1);
-addClock(clock_area, clock_2);
+const clock_1_id = addClock(clock_area, clock_1);
+const clock_2_id = addClock(clock_area, clock_2);
 
-var clocks = []
-clocks.push(clock_1);
-clocks.push(clock_2);
+var clocks = {};
+clocks[clock_1_id] = clock_1;
+clocks[clock_2_id] = clock_2;
 
 // Recursive rendering loop to animate the page.
 const renderLoop = () => {
-	for(let i = 0; i < clocks.length; i++) {
-		const clock = clocks[i];
-		const id = clock.get_id();
+	for(var id in clocks) {
+		const clock = clocks[id];
 		const div = document.getElementById(id);
 		
 		const canvas = div.children[2];

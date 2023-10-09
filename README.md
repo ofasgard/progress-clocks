@@ -1,5 +1,6 @@
 Todo:
 
+- Not super happy with using a global variable to keep track of clocks... is there a better way?
 - Some way to serialise and deserialise progress clock state for saving and loading (implement in Rust)
 - Load progress clocks from (hardcoded for now) serialised data
 - Start implementing session-oriented functionality
