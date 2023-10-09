@@ -53,10 +53,10 @@ function drawClock(ctx, clock, x, y) {
 	ctx.resetTransform();
 }
 
-function addClockToParent(parent, clock) {
+function addClock(parent, clock) {
 	// Create a div for the clock to live in.
 	const div = document.createElement("div");
-	div.id = Math.random().toString(36).substring(2,13);
+	div.id = clock.get_id();
 	parent.appendChild(div);
 
 	// Set the clock's title.
@@ -113,27 +113,25 @@ function addClockToParent(parent, clock) {
 	reduce.addEventListener("click", event => {
 		clock.reduce();
 	});
-	
-	return div.id;
 }
 
-function addClock(clocks, name, positive) {
-	const parent = document.getElementById("clock-area");
-	const clock = ProgressClock.new(name, positive);
-	const clock_id = addClockToParent(parent, clock);
-	
-	clocks[clock_id] = clock;
-	return clocks;
-}
+const clock_area = document.getElementById("clock-area");
 
-let clocks = {};
-clocks = addClock(clocks, "Guards Arrive", false);
-clocks = addClock(clocks, "You Have Escaped!", true);
+const clock_1 = ProgressClock.new("Guards Arrive", false);
+const clock_2 = ProgressClock.new("You Have Escaped!", true);
+
+addClock(clock_area, clock_1);
+addClock(clock_area, clock_2);
+
+var clocks = []
+clocks.push(clock_1);
+clocks.push(clock_2);
 
 // Recursive rendering loop to animate the page.
 const renderLoop = () => {
-	for(var id in clocks) {
-		const clock = clocks[id];
+	for(let i = 0; i < clocks.length; i++) {
+		const clock = clocks[i];
+		const id = clock.get_id();
 		const div = document.getElementById(id);
 		
 		const canvas = div.children[2];

@@ -3,6 +3,7 @@ use console_error_panic_hook;
 
 use std::cmp::min;
 use std::cmp::max;
+use uuid::Uuid;
 
 #[wasm_bindgen]
 pub fn init_panic_hook() {
@@ -14,7 +15,8 @@ pub struct ProgressClock {
 	name: String,
 	size: i32,
 	ticks: i32,
-	positive: bool
+	positive: bool,
+	id: Uuid
 }
 
 #[wasm_bindgen]
@@ -24,7 +26,8 @@ impl ProgressClock {
 			name: name.to_string(),
 			size: 4,
 			ticks: 0,
-			positive: positive
+			positive: positive,
+			id: Uuid::new_v4()
 		}
 	}
 	
@@ -32,6 +35,7 @@ impl ProgressClock {
 	pub fn get_size(&self) -> i32 { self.size }
 	pub fn get_ticks(&self) -> i32 { self.ticks }
 	pub fn is_positive(&self) -> bool { self.positive }
+	pub fn get_id(&self) -> String { self.id.to_string() }
 	
 	pub fn set_name(&mut self, name : &str) { self.name = name.to_string(); }
 	
