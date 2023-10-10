@@ -6,8 +6,8 @@ init_panic_hook();
 const CLOCK_RADIUS = 100;
 const BACKGROUND_COLOR = "#333333";
 const CLOCK_COLOR = "#444444";
-const POSITIVE_TICK_COLOR = "#318CE7";
-const NEGATIVE_TICK_COLOR = "#FF7518";
+const POSITIVE_TICK_COLOR = "#E0FFFF";
+const NEGATIVE_TICK_COLOR = "#A31F34";
 
 function generateWedge(degrees) {
 	// Generate a wedge shape with a specified arc.
