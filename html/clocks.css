@@ -6,3 +6,8 @@ body
 	padding: 0;
 	min-height: 100%;
 }
+
+.clock-container {
+	float: left;
+	margin-bottom: 16px;
+}

@@ -87,6 +87,7 @@ function addClock(parent, clock) {
 	// Create a div for the clock to live in.
 	const div = document.createElement("div");
 	div.id = clock.get_id();
+	div.classList.add("clock-container");
 	parent.appendChild(div);
 
 	// Set the clock's title.
