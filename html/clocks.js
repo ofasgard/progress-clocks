@@ -118,21 +118,15 @@ function addClock(parent, clock) {
 		const canvasX = (event.clientX - boundingRect.left) * scaleX;
 		const canvasY = (event.clientY - boundingRect.top) * scaleY;
 
-		const click = checkTick(ctx, clock, canvasX, canvasY);
-		console.log(click);
+		const clicked_wedge = checkTick(ctx, clock, canvasX, canvasY);
+		if (clicked_wedge > 0) {
+			clock.process_click(clicked_wedge);
+		}
 	});
 	
 	div.appendChild(document.createElement("br"));
 	
-	// Create the buttons to tick/untick/enlarge/reduce the clock.
-	
-	const tick = document.createElement("button");
-	tick.innerHTML = "Tick";
-	div.appendChild(tick);
-	
-	const untick = document.createElement("button");
-	untick.innerHTML = "Untick";
-	div.appendChild(untick);
+	// Create the buttons to enlarge/reduce/remove the clock.
 	
 	div.appendChild(document.createElement("br"));
 	
@@ -151,13 +145,7 @@ function addClock(parent, clock) {
 	div.appendChild(remove);
 	
 	// Add event listeners to connect the buttons to the clock's exported functions.
-	
-	tick.addEventListener("click", event => {
-		clock.tick();
-	});
-	untick.addEventListener("click", event => {
-		clock.untick();
-	});
+
 	enlarge.addEventListener("click", event => {
 		clock.enlarge();
 	});

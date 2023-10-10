@@ -60,6 +60,14 @@ impl ProgressClock {
 		self.set_tick(self.ticks - 1);
 	}
 	
+	pub fn process_click(&mut self, clicked : i32) {
+		if clicked != self.ticks { 
+			self.set_tick(clicked);
+		} else {
+			self.untick();
+		}
+	}
+	
 	pub fn get_tick_color(&self) -> String {
 		match self.positive {
 			true => "#ADD8E6".to_string(),
