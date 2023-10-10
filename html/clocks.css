@@ -24,3 +24,18 @@ body
 	margin-bottom: 32px;
 	min-width: 250px;
 }
+
+.clock-title {
+	background: transparent;
+	border: none;
+	display: block;
+	margin: auto;
+	margin-bottom: 8px;
+	text-align: center;
+}
+
+.clock-canvas {
+	display: block;
+	margin: auto;
+	margin-bottom: 16px;
+}

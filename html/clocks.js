@@ -99,6 +99,8 @@ function addClock(parent, clock) {
 	// Set the clock's title.
 	const title = document.createElement("input");
 	title.value = clock.get_name();
+	title.classList.add("clock-title");
+	title.style.color = clock.is_positive() ? POSITIVE_TICK_COLOR : NEGATIVE_TICK_COLOR;
 	div.appendChild(title);
 	
 	// Add event listener for the clock's title to update the underlying object.
@@ -106,10 +108,9 @@ function addClock(parent, clock) {
 		clock.set_name(title.value);
 	});
 	
-	div.appendChild(document.createElement("br"));
-	
 	// Create a canvas to draw the clock on.
 	const canvas = document.createElement("canvas");
+	canvas.classList.add("clock-canvas");
 	canvas.width = CLOCK_RADIUS * 2;
 	canvas.height = CLOCK_RADIUS * 2;
 	div.appendChild(canvas);
@@ -131,11 +132,7 @@ function addClock(parent, clock) {
 		}
 	});
 	
-	div.appendChild(document.createElement("br"));
-	
 	// Create the buttons to enlarge/reduce/remove the clock.
-	
-	div.appendChild(document.createElement("br"));
 	
 	const enlarge = document.createElement("button");
 	enlarge.innerHTML = "Enlarge";
@@ -144,8 +141,6 @@ function addClock(parent, clock) {
 	const reduce = document.createElement("button");
 	reduce.innerHTML = "Reduce";
 	div.appendChild(reduce);
-	
-	div.appendChild(document.createElement("br"));
 	
 	const remove = document.createElement("button");
 	remove.innerHTML = "Remove";
@@ -198,7 +193,7 @@ const renderLoop = () => {
 		const clock = clocks[id];
 		const div = document.getElementById(id);
 		
-		const canvas = div.children[2];
+		const canvas = div.children[1];
 		const ctx = canvas.getContext('2d');
 		
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
