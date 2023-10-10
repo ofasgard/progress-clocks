@@ -3,11 +3,13 @@ import init, { init_panic_hook, ProgressClock } from '../pkg/progress_clocks.js'
 await init();
 init_panic_hook();
 
+const CLOCK_RADIUS = 100;
+
 function generateWedge(degrees) {
 	// Generate a wedge shape with a specified arc.
 	const path = new Path2D();
-	path.arc(150, 150, 150, 0, (degrees * Math.PI) / 180, false);
-	path.lineTo(150, 150);
+	path.arc(CLOCK_RADIUS, CLOCK_RADIUS, CLOCK_RADIUS, 0, (degrees * Math.PI) / 180, false);
+	path.lineTo(CLOCK_RADIUS, CLOCK_RADIUS);
 	path.closePath();
 	
 	return path;
@@ -30,9 +32,9 @@ function drawClock(ctx, clock, x, y) {
 	ctx.lineWidth = 10;
 	
 	// Initial rotation to orient the clock correctly.
-	ctx.translate(150, 150);
+	ctx.translate(CLOCK_RADIUS, CLOCK_RADIUS);
 	ctx.rotate((270 * Math.PI) / 180);
-	ctx.translate(-150, -150);
+	ctx.translate(-CLOCK_RADIUS, -CLOCK_RADIUS);
 	
 	// Iterate through all wedges and draw them in the correct position.
 	for (let i = 0; i < size; i++) {
@@ -44,9 +46,9 @@ function drawClock(ctx, clock, x, y) {
 		ctx.fill(wedge);
 		ctx.stroke(wedge);
 		
-		ctx.translate(150, 150);
+		ctx.translate(CLOCK_RADIUS, CLOCK_RADIUS);
 		ctx.rotate((degrees * Math.PI) / 180);
-		ctx.translate(-150, -150);
+		ctx.translate(-CLOCK_RADIUS, -CLOCK_RADIUS);
 	}
 		
 	// Clean up our transformations.		
@@ -62,9 +64,9 @@ function checkTick(ctx, clock, clickX, clickY) {
 	const wedge = generateWedge(degrees);
 	
 	// Initial rotation to orient the clock correctly.
-	ctx.translate(150, 150);
+	ctx.translate(CLOCK_RADIUS, CLOCK_RADIUS);
 	ctx.rotate((270 * Math.PI) / 180);
-	ctx.translate(-150, -150);
+	ctx.translate(-CLOCK_RADIUS, -CLOCK_RADIUS);
 	
 	// Iterate through all wedges and check whether the given point is inside each of them.
 	for (let i = 0; i < size; i++) {
@@ -73,9 +75,9 @@ function checkTick(ctx, clock, clickX, clickY) {
 			return i+1;
 		}
 		
-		ctx.translate(150, 150);
+		ctx.translate(CLOCK_RADIUS, CLOCK_RADIUS);
 		ctx.rotate((degrees * Math.PI) / 180);
-		ctx.translate(-150, -150);
+		ctx.translate(-CLOCK_RADIUS, -CLOCK_RADIUS);
 	}
 	
 	// If not in any wedge, return -1.
@@ -104,8 +106,8 @@ function addClock(parent, clock) {
 	
 	// Create a canvas to draw the clock on.
 	const canvas = document.createElement("canvas");
-	canvas.width = 300;
-	canvas.height = 300;
+	canvas.width = CLOCK_RADIUS * 2;
+	canvas.height = CLOCK_RADIUS * 2;
 	div.appendChild(canvas);
 	
 	const ctx = canvas.getContext('2d');
