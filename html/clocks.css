@@ -10,7 +10,7 @@ body
 	margin: auto;
 	width: 30%;
 	text-align: center;
-	margin-bottom: 32px;
+	margin-bottom: 48px;
 }
 
 .clock-area {
@@ -42,6 +42,12 @@ body
 	margin-bottom: 16px;
 }
 
+.clock-buttons {
+	margin: auto;
+	width: 100%;
+	text-align: center;
+}
+
 .button {
 	background: transparent;
 	border: none;
@@ -54,10 +60,14 @@ body
 	background-color: #444444;
 }
 
-.small-button {
-	font-size: 1em;
+.top-button {
+	font-size: 2.5em;
+	margin-left: 8px;
+	margin-right: 8px;
 }
 
-.big-button {
-	font-size: 2em;
+.clock-button {
+	font-size: 2.5em;
+	margin-left: 16px;
+	margin-right: 16px;
 }

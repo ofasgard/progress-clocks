@@ -1,6 +1,5 @@
 Todo:
 
-- General CSS and styling stuff
 - Some way to serialise and deserialise progress clock state for saving and loading (implement in Rust)
 - Load progress clocks from (hardcoded for now) serialised data
 - Start implementing session-oriented functionality

@@ -98,7 +98,7 @@ function addClock(parent, clock) {
 
 	// Set the clock's title.
 	const title = document.createElement("input");
-	title.placeholder = "Progress Clock";
+	title.placeholder = "Clock";
 	if (clock.get_name() != "") { title.value = clock.get_name(); }
 	title.classList.add("clock-title");
 	title.style.color = clock.is_positive() ? POSITIVE_TICK_COLOR : NEGATIVE_TICK_COLOR;
@@ -135,34 +135,38 @@ function addClock(parent, clock) {
 	
 	// Create the buttons to enlarge/reduce/remove the clock.
 	
+	const button_div = document.createElement("div");
+	button_div.classList.add("clock-buttons");
+	div.appendChild(button_div);
+	
 	const enlarge = document.createElement("button");
 	enlarge.classList.add("button");
-	enlarge.classList.add("small-button");
-	enlarge.innerHTML = "Enlarge";
-	div.appendChild(enlarge);
-	
-	const reduce = document.createElement("button");
-	reduce.classList.add("button");
-	reduce.classList.add("small-button");
-	reduce.innerHTML = "Reduce";
-	div.appendChild(reduce);
+	enlarge.classList.add("clock-button");
+	enlarge.innerHTML = "↟";
+	button_div.appendChild(enlarge);
 	
 	const remove = document.createElement("button");
 	remove.classList.add("button");
-	remove.classList.add("small-button");
-	remove.innerHTML = "Remove";
-	div.appendChild(remove);
+	remove.classList.add("clock-button");
+	remove.innerHTML = "🗑";
+	button_div.appendChild(remove);
+	
+	const reduce = document.createElement("button");
+	reduce.classList.add("button");
+	reduce.classList.add("clock-button");
+	reduce.innerHTML = "↡";
+	button_div.appendChild(reduce);
 	
 	// Add event listeners to connect the buttons to the clock's exported functions.
 
 	enlarge.addEventListener("click", event => {
 		clock.enlarge();
 	});
-	reduce.addEventListener("click", event => {
-		clock.reduce();
-	});
 	remove.addEventListener("click", event => {
 		removeClock(clock);
+	});
+	reduce.addEventListener("click", event => {
+		clock.reduce();
 	});
 	
 	return clock.get_id();
