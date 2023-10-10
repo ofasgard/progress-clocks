@@ -15,5 +15,5 @@ body
 .clock-container {
 	float: left;
 	margin-bottom: 32px;
-	width: 16%;
+	min-width: 250px;
 }
