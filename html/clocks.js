@@ -98,7 +98,8 @@ function addClock(parent, clock) {
 
 	// Set the clock's title.
 	const title = document.createElement("input");
-	title.value = clock.get_name();
+	title.placeholder = "Progress Clock";
+	if (clock.get_name() != "") { title.value = clock.get_name(); }
 	title.classList.add("clock-title");
 	title.style.color = clock.is_positive() ? POSITIVE_TICK_COLOR : NEGATIVE_TICK_COLOR;
 	div.appendChild(title);
@@ -176,13 +177,13 @@ const negative_button = document.getElementById("add-negative");
 const clock_area = document.getElementById("clock-area");
 
 positive_button.addEventListener("click", event => {
-	const clock = ProgressClock.new("Progress Clock", true);
+	const clock = ProgressClock.new("", true);
 	const clock_id = addClock(clock_area, clock);
 	clocks[clock_id] = clock;
 });
 
 negative_button.addEventListener("click", event => {
-	const clock = ProgressClock.new("Progress Clock", false);
+	const clock = ProgressClock.new("", false);
 	const clock_id = addClock(clock_area, clock);
 	clocks[clock_id] = clock;
 });

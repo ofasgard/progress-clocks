@@ -27,6 +27,7 @@ body
 .clock-title {
 	background: transparent;
 	border: none;
+	outline: none;
 	display: block;
 	margin: auto;
 	margin-bottom: 8px;
