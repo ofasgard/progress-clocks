@@ -26,7 +26,7 @@ function drawClock(ctx, clock, x, y) {
 	const wedge = generateWedge(degrees);
 	
 	// Set up the context.
-	ctx.strokeStyle = "#FFF";
+	ctx.strokeStyle = "#444444";
 	ctx.lineWidth = 10;
 	
 	// Initial rotation to orient the clock correctly.
@@ -39,7 +39,7 @@ function drawClock(ctx, clock, x, y) {
 		if (ticks > i) {
 			ctx.fillStyle = clock.get_tick_color();
 		} else {
-			ctx.fillStyle = "#CCCCCC";
+			ctx.fillStyle = "#999999";
 		}
 		ctx.fill(wedge);
 		ctx.stroke(wedge);
