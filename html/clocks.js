@@ -4,6 +4,10 @@ await init();
 init_panic_hook();
 
 const CLOCK_RADIUS = 100;
+const BACKGROUND_COLOR = "#333333";
+const CLOCK_COLOR = "#444444";
+const POSITIVE_TICK_COLOR = "#318CE7";
+const NEGATIVE_TICK_COLOR = "#FF7518";
 
 function generateWedge(degrees) {
 	// Generate a wedge shape with a specified arc.
@@ -28,7 +32,7 @@ function drawClock(ctx, clock, x, y) {
 	const wedge = generateWedge(degrees);
 	
 	// Set up the context.
-	ctx.strokeStyle = "#444444";
+	ctx.strokeStyle = BACKGROUND_COLOR;
 	ctx.lineWidth = 10;
 	
 	// Initial rotation to orient the clock correctly.
@@ -39,9 +43,9 @@ function drawClock(ctx, clock, x, y) {
 	// Iterate through all wedges and draw them in the correct position.
 	for (let i = 0; i < size; i++) {
 		if (ticks > i) {
-			ctx.fillStyle = clock.get_tick_color();
+			ctx.fillStyle = clock.is_positive() ? POSITIVE_TICK_COLOR : NEGATIVE_TICK_COLOR;
 		} else {
-			ctx.fillStyle = "#999999";
+			ctx.fillStyle = CLOCK_COLOR;
 		}
 		ctx.fill(wedge);
 		ctx.stroke(wedge);

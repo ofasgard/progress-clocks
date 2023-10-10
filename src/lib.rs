@@ -67,11 +67,4 @@ impl ProgressClock {
 			self.untick();
 		}
 	}
-	
-	pub fn get_tick_color(&self) -> String {
-		match self.positive {
-			true => "#ADD8E6".to_string(),
-			false => "#FF7518".to_string()
-		}
-	}
 }
