@@ -136,14 +136,20 @@ function addClock(parent, clock) {
 	// Create the buttons to enlarge/reduce/remove the clock.
 	
 	const enlarge = document.createElement("button");
+	enlarge.classList.add("button");
+	enlarge.classList.add("small-button");
 	enlarge.innerHTML = "Enlarge";
 	div.appendChild(enlarge);
 	
 	const reduce = document.createElement("button");
+	reduce.classList.add("button");
+	reduce.classList.add("small-button");
 	reduce.innerHTML = "Reduce";
 	div.appendChild(reduce);
 	
 	const remove = document.createElement("button");
+	remove.classList.add("button");
+	remove.classList.add("small-button");
 	remove.innerHTML = "Remove";
 	div.appendChild(remove);
 	

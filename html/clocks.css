@@ -41,3 +41,23 @@ body
 	margin: auto;
 	margin-bottom: 16px;
 }
+
+.button {
+	background: transparent;
+	border: none;
+	text-align: center;
+	font-family: 'Kirsty';
+	color: white;
+}
+
+.button:hover {
+	background-color: #444444;
+}
+
+.small-button {
+	font-size: 1em;
+}
+
+.big-button {
+	font-size: 2em;
+}
