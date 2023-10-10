@@ -53,6 +53,36 @@ function drawClock(ctx, clock, x, y) {
 	ctx.resetTransform();
 }
 
+function checkTick(ctx, clock, clickX, clickY) {
+	// Check which "tick" of the clock a click was in.
+	const size = clock.get_size();
+	
+	// Dynamically create a wedge of the correct angle.
+	const degrees = 360 / size;
+	const wedge = generateWedge(degrees);
+	
+	// Initial rotation to orient the clock correctly.
+	ctx.translate(150, 150);
+	ctx.rotate((270 * Math.PI) / 180);
+	ctx.translate(-150, -150);
+	
+	// Iterate through all wedges and check whether the given point is inside each of them.
+	for (let i = 0; i < size; i++) {
+		if (ctx.isPointInPath(wedge, clickX, clickY)) {
+			ctx.resetTransform();
+			return i+1;
+		}
+		
+		ctx.translate(150, 150);
+		ctx.rotate((degrees * Math.PI) / 180);
+		ctx.translate(-150, -150);
+	}
+	
+	// If not in any wedge, return -1.
+	ctx.resetTransform();
+	return -1;
+}
+
 function addClock(parent, clock) {
 	// Create a div for the clock to live in.
 	const div = document.createElement("div");
@@ -76,6 +106,21 @@ function addClock(parent, clock) {
 	canvas.width = 300;
 	canvas.height = 300;
 	div.appendChild(canvas);
+	
+	const ctx = canvas.getContext('2d');
+	
+	canvas.addEventListener("click", event => {
+		const boundingRect = canvas.getBoundingClientRect();
+
+		const scaleX = canvas.width / boundingRect.width;
+		const scaleY = canvas.height / boundingRect.height;
+
+		const canvasX = (event.clientX - boundingRect.left) * scaleX;
+		const canvasY = (event.clientY - boundingRect.top) * scaleY;
+
+		const click = checkTick(ctx, clock, canvasX, canvasY);
+		console.log(click);
+	});
 	
 	div.appendChild(document.createElement("br"));
 	
