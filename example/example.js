@@ -14,12 +14,12 @@ function generateWedge(degrees) {
 }
 
 function drawClock(ctx, clock, x, y) {
-	// Move our context to the correct position.
-	ctx.translate(x, y);
-
-	// Draw a progress clock to the canvas.
+	// Draws a progress clock to the canvas.
 	const size = clock.get_size();
 	const ticks = clock.get_ticks();
+	
+	// Move our context to the correct position.
+	ctx.translate(x, y);
 	
 	// Dynamically create a wedge of the correct angle.
 	const degrees = 360 / size;
