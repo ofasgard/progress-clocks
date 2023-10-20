@@ -1,6 +1,9 @@
 use wasm_bindgen::prelude::*;
 use console_error_panic_hook;
 
+use serde::Serialize;
+use serde::Deserialize;
+
 use std::cmp::min;
 use std::cmp::max;
 use uuid::Uuid;
@@ -11,6 +14,7 @@ pub fn init_panic_hook() {
 }
 
 #[wasm_bindgen]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct ProgressClock {
 	name: String,
 	size: i32,
@@ -29,6 +33,15 @@ impl ProgressClock {
 			positive: positive,
 			id: Uuid::new_v4()
 		}
+	}
+	
+	pub fn to_string(&self) -> String {
+		serde_json::to_string(&self).unwrap()
+
+	}
+	
+	pub fn from_string(s : String) -> ProgressClock {
+		serde_json::from_str(&s).unwrap()
 	}
 	
 	pub fn get_name(&self) -> String { self.name.to_string() }
